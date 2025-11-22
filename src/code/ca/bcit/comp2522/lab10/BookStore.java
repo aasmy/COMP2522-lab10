@@ -21,7 +21,7 @@ public final class BookStore
     private static final int TARGET_YEAR = 1950;
     private static final int RANGE_START = 1940;
     private static final int RANGE_END = 1950;
-    private static final int DECADE_2000 = 2000;
+    private static final int TARGET_DECADE = 2000;
 
     private static final int DECADE_SPAN = 9;
     private static final int PERCENT_MULTIPLIER = 100;
@@ -166,7 +166,8 @@ public final class BookStore
      *
      * @return a copy of the list of novels
      */
-    public List<Novel> getNovels() {
+    public List<Novel> getNovels()
+    {
         return new ArrayList<>(novels);
     }
 
@@ -188,7 +189,8 @@ public final class BookStore
      */
     public void printBookTitle(final String titlePart)
     {
-        final String lowered = titlePart.toLowerCase();
+        final String lowered;
+        lowered = titlePart.toLowerCase();
 
         novels.stream()
                 .map(Novel::getTitle)
@@ -221,8 +223,8 @@ public final class BookStore
         end = decade + DECADE_SPAN;
 
         novels.stream()
-                .filter(novel -> novel.getYearPublished() >= start
-                        && novel.getYearPublished() <= end)
+                .filter(novel -> novel.getYearPublished() >= start &&
+                        novel.getYearPublished() <= end)
                 .map(Novel::getTitle)
                 .forEach(System.out::println);
     }
@@ -272,11 +274,13 @@ public final class BookStore
      *
      * @param first the starting year
      * @param last  the ending year
+     *
      * @return percentage rounded to nearest integer
      */
-    public int whichPercentWrittenBetween(final int first, final int last)
+    public int whichPercentWrittenBetween(final int first,
+                                          final int last)
     {
-        final long countInRange;
+        final double countInRange;
         final double percentage;
 
         countInRange = novels.stream()
@@ -339,8 +343,8 @@ public final class BookStore
         System.out.println("\nAll Titles in Alphabetical Order:");
         bookstore.printTitlesInAlphaOrder();
 
-        System.out.println("\nBooks from the "+DECADE_2000+"s:");
-        bookstore.printGroupByDecade(DECADE_2000);
+        System.out.println("\nBooks from the "+ TARGET_DECADE +"s:");
+        bookstore.printGroupByDecade(TARGET_DECADE);
 
         System.out.println("\nLongest Book Title:");
         bookstore.getLongest();
